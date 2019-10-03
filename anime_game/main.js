@@ -43,15 +43,33 @@ var __main = function() {
         enemy4: 'img/enemy4.png',
         fire: 'img/fire.png',
         // 走路动画
-        w1: 'img/walking/w1.png',
-        w2: 'img/walking/w2.png',
-        w3: 'img/walking/w3.png',
-        w4: 'img/walking/w4.png',
-        w5: 'img/walking/w5.png',
-        w6: 'img/walking/w6.png',
-        w7: 'img/walking/w7.png',
-        w8: 'img/walking/w8.png',
-        w9: 'img/walking/w9.png',
+        // w1: 'img/walking/w1.png',
+        // w2: 'img/walking/w2.png',
+        // w3: 'img/walking/w3.png',
+        // w4: 'img/walking/w4.png',
+        // w5: 'img/walking/w5.png',
+        // w6: 'img/walking/w6.png',
+        // w7: 'img/walking/w7.png',
+        // w8: 'img/walking/w8.png',
+        // w9: 'img/walking/w9.png',
+        // 闲置
+        idle1: 'img/player-idle/player-idle-1.png',
+        idle2: 'img/player-idle/player-idle-2.png',
+        idle3: 'img/player-idle/player-idle-3.png',
+        idle4: 'img/player-idle/player-idle-4.png',
+        // 跑动
+        run1: 'img/player-run/player-run-1.png',
+        run2: 'img/player-run/player-run-2.png',
+        run3: 'img/player-run/player-run-3.png',
+        run4: 'img/player-run/player-run-4.png',
+        run5: 'img/player-run/player-run-5.png',
+        run6: 'img/player-run/player-run-6.png',
+        run7: 'img/player-run/player-run-7.png',
+        run8: 'img/player-run/player-run-8.png',
+        run9: 'img/player-run/player-run-9.png',
+        run10: 'img/player-run/player-run-10.png',
+        //
+        cave: 'img/cave.png',
     }
     var game = GuaGame.instance(30, images, function(g) {
         // var s = Scene.new(g)
