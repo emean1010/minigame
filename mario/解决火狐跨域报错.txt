@@ -1,0 +1,2 @@
+打开火狐设置页面 about:config
+搜索 file_unique_origin，把这个值改为 false
