@@ -66,6 +66,8 @@ var __main = function() {
         },
     }
     ajax(request)
+    // 没有下面这行，gua_nes_sprite.js 中无法读取 window.bytes
+    log('mario file', window.bytes.length)
 
     var game = GuaGame.instance(30, images, function(g) {
         // var s = Scene.new(g)
