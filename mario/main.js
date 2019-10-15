@@ -51,6 +51,11 @@ var __main = function() {
         b1: 'bird/b1.png',
         b2: 'bird/b2.png',
         b3: 'bird/b3.png',
+        //
+        t1: 'tiles/t1.png',
+        t2: 'tiles/t2.png',
+        t3: 'tiles/t3.png',
+        t4: 'tiles/t4.png',
     }
 
     let request = {
@@ -61,6 +66,7 @@ var __main = function() {
             var game = GuaGame.instance(30, images, function(g) {
                 // var s = Scene.new(g)
                 var s = SceneTitle.new(g)
+                var s = SceneEditor.new(g)
                 g.runWithScene(s)
             })
         },
