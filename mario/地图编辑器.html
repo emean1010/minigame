@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>map editor</title>
+        <style media="screen">
+            div {
+              outline: dashed lightskyblue 1px;
+            }
+            canvas {
+                border: dashed 1px lightskyblue;
+            }
+            * {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="id-canvas"
+            data-action='draw_tile'
+            width="512"
+            height="480">
+        </canvas>
+        <div class="gua-inline-block">
+            <img data-action='change_active_tile' src="tiles/t1.png" data-id="1">
+            <img data-action='change_active_tile' src="tiles/t2.png" data-id="2">
+            <img data-action='change_active_tile' src="tiles/t3.png" data-id="3">
+            <img data-action='change_active_tile' src="tiles/t4.png" data-id="4">
+        </div>
+        <div class="gua-controls">
+            <button data-action='change_offset', data-offset="-1024">-1024</button>
+            <button data-action='change_offset', data-offset="-16">-16</button>
+            <button data-action='change_offset', data-offset="16">16</button>
+            <button data-action='change_offset', data-offset="1024">1024</button>
+            <button data-action='clear_tile', data-selector="#id-canvas-tile">清空 tile</button>
+        </div>
+        <h3>#5080FF</h3>
+<script>
+
+const e = sel => document.querySelector(sel)
+const log = console.log.bind(console)
+
+const actions = {
+    change_active_tile(event) {
+        let id = Number(event.target.dataset.id)
+        log('active tile', id)
+        window.activeTile = event.target
+    },
+    draw_tile(event) {
+        let target = event.target
+        let rect = target.getBoundingClientRect()
+        let x = event.clientX - rect.left
+        let y = event.clientY - rect.top
+        // let i = Math.floor(x / 80)
+        // let j = Math.floor(y / 80)
+        window.context.drawImage(window.activeTile, x, y)
+    },
+}
+
+const bindEvents = () => {
+    e('body').addEventListener('click', event => {
+        let action = event.target.dataset.action
+        actions[action] && actions[action](event)
+    })
+}
+
+const init = () => {
+    window.active_tile_id = null
+    window.canvas = e('canvas')
+    window.context = window.canvas.getContext('2d')
+}
+
+const __main = () => {
+    init()
+    bindEvents()
+}
+
+__main()
+</script>
+    </body>
+</html>

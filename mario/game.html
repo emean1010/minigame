@@ -5,8 +5,14 @@
     <meta charset="utf-8">
     <title>game 1</title>
     <style media="screen">
+        div {
+          outline: dashed lightskyblue 1px;
+        }
         canvas {
             border: 1px black solid;
+        }
+        .gua-inline-block {
+          display: inline-block;
         }
     </style>
     <!-- gua game 相关文件 -->
@@ -32,7 +38,13 @@
 </head>
 
 <body>
-    <canvas id="id-canvas" width="256" height="160"></canvas>
+    <canvas id="id-canvas" width="512" height="480"></canvas>
+    <div class="gua-inline-block">
+        <img data-action='change_active_tile' src="tiles/t1.png" data-id="1">
+        <img data-action='change_active_tile' src="tiles/t2.png" data-id="2">
+        <img data-action='change_active_tile' src="tiles/t3.png" data-id="3">
+        <img data-action='change_active_tile' src="tiles/t4.png" data-id="4">
+    </div>
     <hr>
     <input id="id-input-speed" type="range" name="" value="1">
     <div class="gua-controls">
@@ -88,6 +100,13 @@
             }
         }
 
+        const actions = {
+            change_active_tile(event) {
+                let id = Number(event.target.dataset.id)
+                log('active tile', id)
+            },
+        }
+
         var bindEvents = function() {
             bindAll('.gua-auto-slider', 'input', function(event) {
                 var target = event.target
@@ -98,6 +117,12 @@
                 //
                 var label = target.closest('label').querySelector('.gua-label')
                 label.innerText = v
+            })
+
+            // change_active_tile
+            e('body').addEventListener('click', event => {
+                let action = event.target.dataset.action
+                actions[action] && actions[action](event)
             })
         }
 
