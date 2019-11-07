@@ -51,10 +51,36 @@ const actions = {
         let rect = target.getBoundingClientRect()
         let x = event.clientX - rect.left
         let y = event.clientY - rect.top
-        // let i = Math.floor(x / 80)
-        // let j = Math.floor(y / 80)
-        window.context.drawImage(window.activeTile, x, y)
+        let tilesize = 32
+        let i = Math.floor(x / tilesize)
+        let j = Math.floor(y / tilesize)
+        let x1 = i * tilesize
+        let y1 = j * tilesize
+        window.context.fillStyle = '#5080FF'
+        window.context.fillRect(x1, y1, tilesize, tilesize)
+        window.context.drawImage(window.activeTile, x1, y1)
     },
+}
+
+const tilePosition = (x, y) => {
+    let tilesize = 32
+    let i = Math.floor(x / tilesize)
+    let j = Math.floor(y / tilesize)
+    let x1 = i * tilesize
+    let y1 = j * tilesize
+    return [x1, y1]
+}
+
+const drawTileAt = (x, y) => {
+    let tilesize = 32
+    let [x1, y1] = tilePosition(x, y)
+    window.context.fillRect(x1, y1, tilesize, tilesize)
+    window.context.drawImage(window.activeTile, x1, y1)
+    // 临时策略
+    let tile = Number(window.activeTile.dataset.id)
+    let mx = x1 / tilesize
+    let my = y1 / tilesize
+    window.map.setTile(mx, my, tile)
 }
 
 const bindEvents = () => {
@@ -62,14 +88,57 @@ const bindEvents = () => {
         let action = event.target.dataset.action
         actions[action] && actions[action](event)
     })
+    // 拖动事件
+    let moving = false
+    window.canvas.addEventListener('mousedown', event => {
+        moving = true
+        let x = event.clientX
+        let y = event.clientY
+        drawTileAt(x, y)
+    })
+    window.canvas.addEventListener('mousemove', event => {
+        if (moving) {
+            let x = event.clientX
+            let y = event.clientY
+            drawTileAt(x, y)
+        }
+    })
+    window.canvas.addEventListener('mouseup', event => {
+        moving = false
+    })
 }
 
 const init = () => {
+    window.map = new Map()
     window.active_tile_id = null
     window.canvas = e('canvas')
     window.context = window.canvas.getContext('2d')
+    window.context.fillStyle = '#5080FF'
+    window.context.fillRect(0, 0, 1000, 1000)
 }
 
+class Map {
+    constructor() {
+        this.height = 15
+        this.width = 20
+        this.tiles = []
+        this.setupTiles()
+    }
+    setupTiles() {
+        let s = this.height * this.width
+        for (var i = 0; i < s; i++) {
+            this.tiles[i] = 0
+        }
+    }
+    setTile(i, j , tile) {
+        let index = i * this.height + j
+        this.tiles[index] = tile
+    }
+    exportJSON() {
+        let s = JSON.stringify(this.tiles)
+        log(s)
+    }
+}
 const __main = () => {
     init()
     bindEvents()
