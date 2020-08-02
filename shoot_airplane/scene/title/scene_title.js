@@ -71,11 +71,14 @@ class GuaParticleSystem {
         }
         // 删除死掉的小火花
         this.particles = this.particles.filter(p => p.life > 0)
+        if (this.duration < 0) {
+           this.particles = []
+        }
     }
     draw() {
-        if (this.duration < 0) {
-           return
-        }
+        // if (this.duration < 0) {
+        //    return
+        // }
         for (var p of this.particles) {
             p.draw()
         }
