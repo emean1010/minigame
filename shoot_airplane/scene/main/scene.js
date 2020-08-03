@@ -86,10 +86,6 @@ class Enemy extends GuaImage {
         }
         if (this.cooldown == 0) {
             this.cooldown = config.enemy_fire_cooldown + randomBetween(0, 10)
-            // var f = randomBetween(1, 10)
-            // if (f == 5) {
-            //    this.fire()
-            // }
             this.fire()
         }
     }
@@ -137,14 +133,14 @@ class Scene extends GuaScene {
         this.bg = GuaImage.new(game, 'sky')
         this.cloud = Cloud.new(game, 'cloud')
 
-        // this.player = GuaImage.new(game, 'player')
         this.player = Player.new(game)
         this.player.x = 100
         this.player.y = 150
 
         this.addElement(this.bg)
         this.addElement(this.cloud)
-        this.addElement(this.player)
+        // this.addElement(this.player)
+        this.addPlayer(this.player)
         //
         this.addEnemies()
         // 添加小火花
@@ -156,7 +152,8 @@ class Scene extends GuaScene {
         for (var i = 0; i < this.numberOfEnemies; i++) {
             var e = Enemy.new(this.game)
             es.push(e)
-            this.addElement(e)
+            // this.addElement(e)
+            this.addEnemyElement(e)
         }
         this.enemies = es
     }
