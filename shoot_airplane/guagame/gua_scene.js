@@ -54,6 +54,10 @@ class GuaScene {
                 if(yd > ms & yd < s & xd > ms & xd < s){
                     this.bullets.splice(i, 1)
                     this.enemyBullets.splice(j, 1)
+                    var ps = GuaParticleSystem.new(this.game)
+                    ps.x = b.x
+                    ps.y = b.y
+                    this.addElement(ps)
               }
             }
         }

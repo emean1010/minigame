@@ -91,8 +91,8 @@ class SceneTitle extends GuaScene {
         var label = GuaLabel.new(game, 'hello')
         this.addElement(label)
 
-        var ps = GuaParticleSystem.new(game)
-        this.addElement(ps)
+        // var ps = GuaParticleSystem.new(game)
+        // this.addElement(ps)
     }
     // draw() {
     //     super.draw()
