@@ -99,6 +99,28 @@ class SceneTitle extends GuaScene {
         this.birdSpeed = config.bird_spped.value
     }
     update() {
+        // 判断游戏结束
+        var bird = this.bird
+        var bx = this.bird.x
+        var by = this.bird.y
+        var pipes = this.pipe.pipes
+        for (var i = 0; i < pipes.length; i += 2) {
+            var p1 = pipes[i]
+            var p2 = pipes[i + 1]
+            // 判断碰撞
+            var x1 = p1.x
+            var x2 = p1.x + p1.w
+            var y1 = p1.y
+            var y2 = p2.y
+            if (bx >= x1 && bx <= x2) {
+                if (by <= y1 || by >= y2) {
+                    // 跳转到游戏结束的场景
+                    // log('game over', bx, by, x1, x2, y1, y2)
+                    var end = SceneEnd.new(this.game)
+                    this.game.replaceScene(end)
+                }
+            }
+        }
         super.update()
         // 地面移动
         this.skipCount--
