@@ -110,7 +110,7 @@ class SceneTitle extends GuaScene {
             // 判断碰撞
             var x1 = p1.x
             var x2 = p1.x + p1.w
-            var y1 = p1.y
+            var y1 = p1.y + p1.h
             var y2 = p2.y
             if (bx >= x1 && bx <= x2) {
                 if (by <= y1 || by >= y2) {
